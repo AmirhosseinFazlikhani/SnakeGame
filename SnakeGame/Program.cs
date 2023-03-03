@@ -11,16 +11,16 @@ class Program
     {
         var snake = new Snake(new Point(3, 3));
         snake.WhenDead(GameOver);
-        var squad = new Squad(40, 20, 2);
+        var playground = new Playground(40, 20, 2);
 
-        while (squad.IsValid(snake.Head.Position))
+        while (playground.IsValid(snake.Head.Position))
         {
             snake.Move();
 
-            if (squad.FoodExists(snake.Points))
+            if (playground.FoodExists(snake.Points))
             {
-                snake.Eat(squad.Food);
-                squad.NewFood();
+                snake.Eat(playground.Food);
+                playground.NewFood();
                 ShowScore(snake);
             }
         }

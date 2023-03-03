@@ -1,6 +1,6 @@
 ﻿namespace SnakeGame;
 
-public class Squad
+public class Playground
 {
     public int Margin { get; }
 
@@ -10,7 +10,7 @@ public class Squad
 
     public Food Food { get; private set; }
 
-    public Squad(int width, int height, int margin = 0)
+    public Playground(int width, int height, int margin = 0)
     {
         Width = width;
         Height = height;
