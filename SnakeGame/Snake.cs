@@ -60,14 +60,12 @@ public class Snake
         });
 
         _body.Add(new SnakeBodyBlock(initialPosition, _direction));
-        Appear();
+        Appear(Head);
     }
 
     public void Move()
     {
         Thread.Sleep(SpeedInMilliseconds);
-
-        Disappear();
 
         var step = GetNextStep(Direction);
 
@@ -80,8 +78,10 @@ public class Snake
             Kill();
         }
 
+        Disappear(Tail);
+        Appear(Head);
+        
         _body.RemoveAt(0);
-        Appear();
     }
 
     private bool HasCollision()
@@ -89,24 +89,18 @@ public class Snake
         return _body.SkipLast(1).Any(b => b.Position.Equals(Head.Position));
     }
 
-    private void Disappear()
+    private void Disappear(SnakeBodyBlock block)
     {
-        foreach (var block in _body)
-        {
-            Console.CursorLeft = block.Position.Left;
-            Console.CursorTop = block.Position.Top;
-            Console.Write(" ");
-        }
+        Console.CursorLeft = block.Position.Left;
+        Console.CursorTop = block.Position.Top;
+        Console.Write(" ");
     }
 
-    private void Appear()
+    private void Appear(SnakeBodyBlock block)
     {
-        foreach (var block in _body)
-        {
-            Console.CursorLeft = block.Position.Left;
-            Console.CursorTop = block.Position.Top;
-            Console.Write("O");
-        }
+        Console.CursorLeft = block.Position.Left;
+        Console.CursorTop = block.Position.Top;
+        Console.Write("O");
     }
 
     public void Eat(Food food)
